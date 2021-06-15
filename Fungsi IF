@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(App04());
+
+class App04 extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Program Menghitung',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('mhd.hamdyadlan (6SIA1)'),
+        ),
+        body: MhdHamdyApp(),
+      ),
+    );
+  }
+}
+
+class MhdHamdyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MhdHamdyApp> {
+  final txtnama = TextEditingController();
+  final txtjmasuk = TextEditingController();
+  final txtjkeluar = TextEditingController();
+  final txttarif = TextEditingController();
+
+  String hasil = '';
+
+  onHitung() {
+    setState(() {
+      var lama = int.parse(txtjkeluar.text) - int.parse(txtjmasuk.text);
+      var total = int.parse(txttarif.text) * lama;
+
+      hasil = "Lama net $lama\n Biaya ${txtnama.text} adalah Rp.$total";
+
+      if (lama > 1) hasil = hasil + "\nBonus Teh Botol";
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          TextField(
+            controller: txtnama,
+            decoration: new InputDecoration(
+              labelText: "Nama User",
+            ),
+          ),
+          TextField(
+            controller: txtjmasuk,
+            decoration: new InputDecoration(
+              labelText: "Jam Masuk",
+            ),
+          ),
+          TextField(
+            controller: txtjkeluar,
+            decoration: new InputDecoration(
+              labelText: "Jam Keluar",
+            ),
+          ),
+          TextField(
+            controller: txttarif,
+            decoration: new InputDecoration(
+              labelText: "Tarif Perjam",
+            ),
+          ),
+          RaisedButton(
+            child: Text("Hitung"),
+            onPressed: onHitung,
+          ),
+          Text(hasil),
+        ],
+      ),
+    );
+  }
+}
