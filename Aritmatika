@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(App12());
+
+class App12 extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Program Menghitung Luas Persegi',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('mhd.hamdyadlan (6SIA1)'),
+        ),
+        body: MhdHamdyApp(),
+      ),
+    );
+  }
+}
+
+class MhdHamdyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MhdHamdyApp> {
+  final txtPanjangPersegi = TextEditingController();
+  final txtLebarPersegi = TextEditingController();
+
+  String hasil = '';
+
+  onHitung() {
+    setState(() {
+      var luas =
+          int.parse(txtLebarPersegi.text) * int.parse(txtPanjangPersegi.text);
+      hasil = "Luas Persegi  = $luas Cm";
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          TextField(
+            controller: txtPanjangPersegi,
+            decoration: new InputDecoration(
+              labelText: "Input Panjang",
+            ),
+          ),
+          TextField(
+            controller: txtLebarPersegi,
+            decoration: new InputDecoration(
+              labelText: "Input Lebar",
+            ),
+          ),
+          RaisedButton(
+            child: Text("Hitung"),
+            onPressed: onHitung,
+          ),
+          Text(hasil),
+        ],
+      ),
+    );
+  }
+}
